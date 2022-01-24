@@ -45,9 +45,45 @@ class ListaEncadenada:
             aux = aux.next
         return None
 
+    def longitud( self ):
+        aux = self.head
+        cont = 0
+        while aux != None:
+            cont += 1
+            aux = aux.next
+        return cont
+
     def insertaNodoEnPosicion( self, nuevoNodo, indice ):
-        pass
-        # Hacer un conteo de los nodo actuales en la lista
-        # Validar el índice contra el conteo. 
-        # En caso en el que el índice es mayor al conteo, retorno None
-        # De lo contrario insertar el nodo y retornar un mensaje de éxito
+        if indice <= self.longitud():
+            if indice == 0:
+                nuevoNodo.next = self.head
+                self.head = nuevoNodo
+            else:
+                aux = self.head
+                prev = aux
+                x = 0
+                while x < indice:
+                    prev = aux
+                    aux = aux.next
+                    x += 1
+                prev.next = nuevoNodo
+                nuevoNodo.next = aux
+        else:
+            return "Indice inválido."
+    
+    def esListaCircular( self ):
+        if self.head == None:
+            return False
+        else:
+            aux1 = self.head
+            aux2 = self.head
+            while aux2.next != None:
+                aux1 = aux1.next
+                aux2 = aux2.next.next
+                if aux1 == aux2:
+                    return True   
+                if aux2 == None:
+                    return False
+            return False
+                
+
